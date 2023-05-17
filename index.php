@@ -13,4 +13,4 @@
 	}
    include('dashboard.php');
 ?>
-<!DOCTYPE html>
+

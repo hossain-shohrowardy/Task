@@ -15,39 +15,10 @@ else{
 
 
 	// connect to database
-	$db = mysqli_connect('localhost', 'root', '', 'task');
+	//$db = mysqli_connect('localhost', 'root', '', 'task');
+      include 'includes/db.php';
 
 	// REGISTER USER
-/*	if (isset($_POST['reg_user'])) {
-		// receive all input values from the form
-		$username = mysqli_real_escape_string($db, $_POST['username']);
-		$email = mysqli_real_escape_string($db, $_POST['email']);
-		$password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
-		$password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
-
-		// form validation: ensure that the form is correctly filled
-		if (empty($username)) { array_push($errors, "Username is required"); }
-		if (empty($email)) { array_push($errors, "Email is required"); }
-		if (empty($password_1)) { array_push($errors, "Password is required"); }
-
-		if ($password_1 != $password_2) {
-			array_push($errors, "The two passwords do not match");
-		}
-
-		// register user if there are no errors in the form
-		if (count($errors) == 0) {
-			$password = md5($password_1);//encrypt the password before saving in the database
-			$query = "INSERT INTO users (username, email, password) 
-					  VALUES('$username', '$email', '$password')";
-			mysqli_query($db, $query);
-
-			$_SESSION['username'] = $username;
-			$_SESSION['success'] = "You are now logged in";
-			header('location: index.php');
-		}
-
-	}*/
-
     if (isset($_POST['reg_user'])) {
 		// receive all input values from the form
 		$username = mysqli_real_escape_string($db, $_POST['username']);
@@ -111,15 +82,13 @@ else{
 		}
 
 		if (count($errors) == 0) {
-			//$password = md5($password);
-          // $password=password_hash($password, PASSWORD_DEFAULT);
+			
 			$query = "SELECT * FROM user_info WHERE user_name='$username'";
 			$results = mysqli_query($db, $query);
             $hashedPassword="";
             while($row=mysqli_fetch_object($results)){
                 $hashedPassword=$row->user_password;
              }
-            // echo $password.'\n'. $hashedPassword; return;
 
 			if(password_verify($password,$hashedPassword)) {
             	$_SESSION['username'] = $username;
@@ -131,6 +100,7 @@ else{
 		}
 	}
 
+//Edit User
     if (isset($_POST['edit_user'])) {
       
             $editId=$_POST['edit_id'];
@@ -143,6 +113,8 @@ else{
             
     }
 
+
+//Update User
     if (isset($_POST['update_user'])) {
         
         $username = mysqli_real_escape_string($db, $_POST['username']);
@@ -197,6 +169,7 @@ else{
 
     }
 
+ // Delete User   
     if (isset($_POST['delete_user'])) {
            $deleteId=$_POST['delete_id'];
            $query="Delete From user_info where id='$deleteId'";
@@ -206,6 +179,9 @@ else{
 
 
     }
+
+    // Change Password Ajax call
+
     if(isset($_GET['changeId']) && isset($_GET['oldPass']) ){
         $changeId=$_GET['changeId'];
         $oldPass=$_GET['oldPass'];
@@ -229,6 +205,7 @@ else{
 
     }
 
+    //Update Password
     if (isset($_POST['update_pass'])) {
         $changeId=$_POST['change_id'];
         $newPassword=$_POST['new_pass'];
