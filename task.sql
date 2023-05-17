@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2023 at 12:13 PM
+-- Generation Time: May 17, 2023 at 01:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -20,26 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `task`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) DEFAULT NULL,
-  `user_name` varchar(100) NOT NULL,
-  `user_email` varchar(100) NOT NULL,
-  `user_password` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `user_name`, `user_email`, `user_password`) VALUES
-(NULL, '', '', '$2y$10$wY2LEWKLkQCacVvJ8W47d..u0gMssQYubPZ94m3two8/tVEIcerii');
 
 -- --------------------------------------------------------
 
@@ -66,13 +46,6 @@ INSERT INTO `user_info` (`id`, `user_name`, `user_email`, `user_password`, `file
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD UNIQUE KEY `user_name` (`user_name`),
-  ADD UNIQUE KEY `user_email` (`user_email`);
 
 --
 -- Indexes for table `user_info`
